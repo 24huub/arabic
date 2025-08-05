@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Song Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      backdrop-filter: blur(18px);
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+    }
+    .cover {
+      width: 260px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    audio {
+      width: 90%;
+      max-width: 400px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <div class="content">
+    <img id="cover" class="cover" src="cover1.jpg" alt="Cover Image">
+    <h2 id="title">Now Playing</h2>
+    <audio id="audio" controls autoplay>
+      <source id="audioSource" src="song1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <script>
+    const songs = [
+      { file: "song1.mp3", cover: "cover1.jpg", title: "Song 1" },
+      { file: "song2.mp3", cover: "cover2.jpg", title: "Song 2" },
+      { file: "song3.mp3", cover: "cover3.jpg", title: "Song 3" },
+      { file: "song4.mp3", cover: "cover4.jpg", title: "Song 4" },
+      { file: "song5.mp3", cover: "cover5.jpg", title: "Song 5" },
+      { file: "song6.mp3", cover: "cover6.jpg", title: "Song 6" },
+      { file: "song7.mp3", cover: "cover7.jpg", title: "Song 7" },
+      { file: "song8.mp3", cover: "cover8.jpg", title: "Song 8" },
+      { file: "song9.mp3", cover: "cover9.jpg", title: "Song 9" },
+      { file: "song10.mp3", cover: "cover10.jpg", title: "Song 10" }
+    ];
+    const i = Math.floor(Math.random() * songs.length);
+    const song = songs[i];
+    document.getElementById("audioSource").src = song.file;
+    document.getElementById("audio").load();
+    document.getElementById("cover").src = song.cover;
+    document.getElementById("overlay").style.backgroundImage = `url(${song.cover})`;
+    document.body.style.backgroundImage = `url(${song.cover})`;
+    document.getElementById("title").innerText = "Now Playing: " + song.title;
+  </script>
+</body>
+</html>
